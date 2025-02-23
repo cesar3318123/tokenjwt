@@ -39,3 +39,17 @@ body {
     background-position: center;
     margin: 0;
 }
+
+form button {
+    background-color: #1219ec;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 15px;
+}
+
+form button:hover {
+    background-color: #81ecff;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 15px;
+}

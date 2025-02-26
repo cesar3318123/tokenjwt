@@ -22,15 +22,26 @@ async function iniciarSesion(event) {
 
     const data = await response.json(); // Convierte la respuesta en json
 
-    if(response.ok) {
+    if (response.ok) {
+        // Guarda el usuario y el token en localStorage
+        localStorage.setItem("usuario", JSON.stringify({ username }));
         localStorage.setItem("token", data.token);
+
         alert("Inicio de sesión exitoso");
-        window.location.href = "perfil.html"
+
+        // Redirige a la página home.html
+        window.location.href = "home.html";
+
+        // Cerrar sesión automáticamente después de 30 segundos
+        setTimeout(() => {
+            cerrarSesion(); // Llama a la función de cerrar sesión
+        }, 30000); // 30 segundos
+
     } else {
-
-        alert("Error: " + data.message)
-
+        alert("Error: " + data.message);
     }
+
+
 
 
 }
@@ -44,7 +55,7 @@ function verificarAutenticacion() {
 }
 
 function cerrarSesion() {
-    alert("Funciona bien")
+
 
     localStorage.removeItem("token")
     alert("Sesión cerrada");
@@ -81,17 +92,17 @@ async function registrarUsuario(event) {
 }
 
 
-if(window.location.pathname.includes("perfil.html")) {
+if(window.location.pathname.includes("home.html")) {
     verificarAutenticacion();
 }
 
 
 document.addEventListener("DOMContentLoaded", ()=> {
-    const loginBtn = document.getElementById("login-btn");
+    const loginBtn = document.getElementById("login-form");
     const registroForm = document.getElementById("registro-form");
     const logoutBtn = document.getElementById("logout-btn");
 
-    if (loginBtn) loginBtn.addEventListener("click", iniciarSesion);
+    if (loginBtn) loginBtn.addEventListener("submit", iniciarSesion);
     if (registroForm) registroForm.addEventListener("submit", registrarUsuario);
     if (logoutBtn) logoutBtn.addEventListener("click", cerrarSesion);
 
@@ -99,7 +110,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
 function togglePassword() {
-    let input = document.getElementById("");
+    let input = document.getElementById("contrasena");
     if (input.type === "password") {
         input.type = "text"; // Muestra la contraseña
     } else {

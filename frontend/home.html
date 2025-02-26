@@ -12,10 +12,15 @@
     <div class="contenedor4">
 
 
-            <p style="font-size: 40px; font-family: Arial, Helvetica, sans-serif">Iniciar</p>
+            <p style="font-size: 40px; font-family: Arial, Helvetica, sans-serif">Inicio</p>
 
-            <button onclick="window.location.href='login.html'">Iniciar sesión</button>
-            <button class="botonperfil" onclick="window.location.href='pefil.html'">Mi perfil</button> 
+            <p style="font-size: 30px; font-family: Arial, Helvetica, sans-serif;">Estas registrado</p>
+
+            <p id="mensajeUsuario"></p>
+
+            
+            <button onclick="cerrarSesion()">Cerrar sesión</button>
+           
 
 
 
@@ -26,6 +31,35 @@
 
         
     </div>
+
+
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+            const usuarioGuardado = localStorage.getItem("usuario");
+            const mensajeUsuario = document.getElementById("mensajeUsuario");
+    
+            if (usuarioGuardado) {
+                const usuario = JSON.parse(usuarioGuardado);
+                mensajeUsuario.textContent = `Tu correo es:  ${usuario.username}`;
+            } else {
+                mensajeUsuario.textContent = "Aún no te has registrado.";
+            }
+
+            // Cerrar sesión automáticamente después de 30 segundos
+            setTimeout(() => {
+                cerrarSesion(); // Llama a la función de cerrar sesión
+            }, 30000); // 30 segundos
+        });
+
+        // Función para cerrar sesión
+        function cerrarSesion() {
+            localStorage.removeItem("usuario");
+            localStorage.removeItem("token");
+            alert("Tu sesión ha expirado (token borrado).");
+            window.location.href = "login.html"; // Redirige al login después de cerrar sesión
+        }
+
+    </script>
     
 </body>
 </html>

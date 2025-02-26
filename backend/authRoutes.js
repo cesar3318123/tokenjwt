@@ -13,7 +13,7 @@ router.post("/login", async (req, res) => {
         const { username, password } = req.body;
 
         // Busca el usuario en la base de datos
-        const user = await User.findOne({ where: { username } });
+        const user = User.findByUsername(username);
 
         // Si el usuario no existe, devuelve un error
         if (!user) {
@@ -27,7 +27,7 @@ router.post("/login", async (req, res) => {
         }
 
         // Si las credenciales son correctas, genera un token JWT
-        const token = jwt.sign({ id: user.id }, "secreto", { expiresIn: "1h" });
+        const token = jwt.sign({ id: user.id }, "secreto", { expiresIn: "30s" });
 
         // Envía el token al cliente
         res.json({ token });
@@ -35,7 +35,7 @@ router.post("/login", async (req, res) => {
     } catch (error) {
         console.error("Error en el servidor:", error);
         // Si ocurre un error en el servidor, responde con un mensaje de error
-        res.status(500).json({ message: "Error en el servidor" });
+        res.status(500).json({ message: "Error en el servidor", error });
     }
 });
 
@@ -62,8 +62,6 @@ router.post("/register", async (req, res) => {
     }
 });
 
-router.post("/login", async (req, res) => {
 
-})
 
 module.exports = router;

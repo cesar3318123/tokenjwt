@@ -14,7 +14,9 @@
     padding: 10px;
 }
 
-form {
+
+.contenedor4{
+
     background-color: rgba(185, 197, 244, 0.8);
     padding: 10px;
     border-radius: 12px;
@@ -27,6 +29,7 @@ form {
     display:flex;
     flex-direction: column;
     gap: 20px;
+
 }
 
 body {
@@ -40,16 +43,30 @@ body {
     margin: 0;
 }
 
-form button {
+button {
     background-color: #1219ec;
     font-size: 25px;
     font-family: Arial, Helvetica, sans-serif;
     border-radius: 15px;
 }
 
-form button:hover {
+button:hover {
     background-color: #81ecff;
     font-size: 25px;
     font-family: Arial, Helvetica, sans-serif;
+    border-radius: 15px;
+}
+
+.botonperfil {
+    background-color: green;
+    font-size: 25px;
+    font-family:Arial, Helvetica, sans-serif;
+    border-radius: 15px;
+}
+
+.botonperfil:hover {
+    background-color: rgb(165, 210, 165);
+    font-size: 25px;
+    font-family:Arial, Helvetica, sans-serif;
     border-radius: 15px;
 }
